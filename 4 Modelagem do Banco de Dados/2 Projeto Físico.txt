@@ -1,0 +1,65 @@
+DDL POSTGRESQL
+
+CREATE TABLE Usuario (
+  CPF VARCHAR(11) PRIMARY KEY,
+  Nome VARCHAR(100) NOT NULL,
+  Email VARCHAR(100) NOT NULL,
+  Senha VARCHAR(50) NOT NULL,
+  Tipo VARCHAR(20) NOT NULL,
+  Status BOOLEAN NOT NULL
+);
+
+CREATE TABLE Telefones (
+  Cpf VARCHAR(11) NOT NULL,
+  Telefone VARCHAR(20) NOT NULL,
+  FOREIGN KEY (Cpf) REFERENCES Usuario (CPF)
+);
+
+
+
+
+
+
+CREATE TABLE Espaço (
+  Código SERIAL PRIMARY KEY,
+  Nome VARCHAR(100) NOT NULL,
+  Status BOOLEAN NOT NULL,
+  Iluminação BOOLEAN NOT NULL,
+  Coberto BOOLEAN NOT NULL,
+  Piso VARCHAR(20) NOT NULL,
+  Equipamentos VARCHAR(200)
+);
+
+CREATE TABLE Marcação (
+  Cód SERIAL PRIMARY KEY,
+  Marcações TIMESTAMP NOT NULL,
+  Espaço_Código INTEGER NOT NULL,
+  FOREIGN KEY (Espaço_Código) REFERENCES Espaço (Código)
+);
+
+CREATE TABLE Equipamento (
+  Cód SERIAL PRIMARY KEY,
+  Equipamentos VARCHAR(200) NOT NULL,
+  Espaço_Código INTEGER NOT NULL,
+  FOREIGN KEY (Espaço_Código) REFERENCES Espaço (Código)
+);
+
+
+
+
+
+
+CREATE TABLE Reserva (
+  Código SERIAL PRIMARY KEY,
+  Valor DECIMAL(10,2) NOT NULL,
+  h_Inic TIMESTAMP NOT NULL,
+  h_Fim TIMESTAMP NOT NULL,
+  Data DATE NOT NULL,
+  Justificativa VARCHAR(200),
+  Tipo VARCHAR(20) NOT NULL,
+  Status VARCHAR(20),
+  CPF_Usu VARCHAR(11) NOT NULL,
+  Cod_Esp INTEGER NOT NULL,
+  FOREIGN KEY (CPF_Usu) REFERENCES Usuário (CPF),
+  FOREIGN KEY (Cod_Esp) REFERENCES Espaço (Código)
+);

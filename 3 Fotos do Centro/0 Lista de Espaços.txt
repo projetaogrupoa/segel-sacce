@@ -1,0 +1,72 @@
+--- Campo A
+Iluminação: Não
+Coberto: Não
+Piso: Grama
+Espaço aberto: Sim
+--- Campo B
+Iluminação: Não
+Coberto: Não
+Piso: Grama
+Espaço aberto: Sim
+--- Clube Universitário (Salão)
+Iluminação: Sim
+Coberto: Sim
+Piso: Rígido
+Espaço aberto: Sim
+--- Clube Universitário (Piscina)
+Iluminação: Sim
+Coberto: Não
+Piso: <>
+Espaço aberto: Não
+--- Dojô
+Iluminação: Sim
+Coberto: Sim
+Piso: Emborrachado 
+Espaço aberto: Não
+--- Ginásio A (Futsal)
+Iluminação: Sim
+Coberto: Sim
+Piso: Rígido emborrachado
+Espaço aberto: Não
+--- Ginásio B (Vôlei)
+Iluminação: Sim
+Coberto: Sim
+Piso: Rígido emborrachado
+Espaço aberto: Não
+--- Ginásio C (Badminton)
+Iluminação: Sim
+Coberto: Sim
+Piso: Rígido emborrachado
+Espaço aberto: Não
+--- Piscina Olímpica
+Iluminação: Sim
+Coberto: Não
+Piso: <>
+Espaço aberto: Não
+--- Pista Atlética*
+Iluminação: Não
+Coberto: Não
+Piso: Variado, natural
+Espaço aberto: Sim
+--- Quadra A (Basquete)
+Iluminação: Não
+Coberto: Sim
+Piso: Rígido emborrachado
+Espaço aberto: Não
+--- Quadra B (Handebol)
+Iluminação: Não
+Coberto: Sim
+Piso: Rígido emborrachado
+Espaço aberto: Não
+--- Quadra C (Tênis)
+Iluminação: Não
+Coberto: Não
+Piso: Rígido
+Espaço aberto: Sim
+--- Quadra D (Vôlei)
+Iluminação: Não
+Coberto: Sim
+Piso: Rígido emborrachado
+Espaço aberto: Não
+
+*Subdivisões pouco claras, pode ser usada por muitas pessoas ao mesmo tempo

@@ -1,0 +1,16 @@
+1. Usuário (_CPF_, Nome!, Email!, Senha!, Tipo!, Status!)
+
+1.1 Telefones (_Cpf, Telefone_)
+Cpf => Usuário (CPF)
+
+2. Espaço (_Código_, [Nome]!, Status!, Iluminação!, Coberto!, Piso!)
+
+2.1 Marcação (_Cód, Marcações_)
+Cód => Espaço (Código)
+
+2.2 Equipamento (_Cód, Equipamentos_)
+Cód => Espaço (Código)
+
+3. Reserva (_Código_, Valor!, h_Inic!, h_Fim!, Data!, Justificativa, Tipo!, Status!, [CPF_Usu]!, [Cod_Esp]!)
+CPF_Usu => Usuário (CPF)
+Cod_Esp => Espaço (Código)
