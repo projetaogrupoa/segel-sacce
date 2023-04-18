@@ -15,9 +15,10 @@ from area import router as area
 from reservation import router as reservation
 from fastapi.middleware.cors import CORSMiddleware
 
+
 model.Base.metadata.create_all(bind=engine)
 
-app = FastAPI()
+app = FastAPI(title="FastApi")
 
 origins = ["*"]
 
