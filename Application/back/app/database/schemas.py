@@ -7,7 +7,7 @@ class ReservationBase(BaseModel):
     time_start: str
     time_end: str
     justification: str
-    type: str
+    user_type: str
     status: str   
 
 class ReservationCreate(ReservationBase):
@@ -48,7 +48,7 @@ class Account(AccountBase):
     name: str
     email: str
     hashed_password: str
-    type: str
+    user_type: str
     available: bool
     phone_number: str
     

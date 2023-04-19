@@ -19,9 +19,8 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 30
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/account/sign-in",
-scheme_name="JWT"
-)
-
+                                     scheme_name="JWT"
+                                     )
 
 
 def verify_password(password, hashed_password):
@@ -44,6 +43,7 @@ def authenticate_user(db: Session, email: str, password: str):
         return False
     return user
 
+
 def create_access_token(data: dict, expires_delta: timedelta | None = None):
     to_encode = data.copy()
     if expires_delta:
@@ -53,6 +53,7 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
+
 
 async def get_current_user(token: str = Depends(oauth2_scheme)):
     credentials_exception = HTTPException(
@@ -69,35 +70,32 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
         return token_data
     except JWTError:
         raise credentials_exception
-    
+
 
 async def get_current_active_user(current_user: schemas.Account = Depends(get_current_user)):
     if current_user.disabled:
         raise HTTPException(status_code=400, detail="Inactive user")
     return current_user
 
+
 def get_account_by_email(db: Session, email: str):
     return db.query(model.Account).filter(model.Account.email == email).first()
 
+
 def create_account(db: Session, account: schemas.Account):
     db_account = model.Account(
-        id = uuid.uuid4().hex,
-        email=account.email, 
+        id=uuid.uuid4().hex,
+        email=account.email,
         hashed_password=get_password_hash(account.hashed_password),
-        first_name= account.first_name,
-        last_name = account.last_name,
-        first_date_product_register = account.first_date_product_register,
-        last_date_product_register = account.last_date_product_register,
-        amount_product= account.amount_product,
-        first_date_order = account.first_date_order,
-        last_date_order = account.last_date_order,
-        amount_order=  account.amount_order,
-        amount_register_order= account.amount_register_order,
-        amount_register_product= account.amount_register_product
-        )
+        cpf=account.cpf,
+        name=account.name,
+        user_type=account.user_type,
+        available=account.available,
+        phone_number=account.phone_number
+    )
 
     db.add(db_account)
     db.commit()
     db.refresh(db_account)
-    
+
     return db_account

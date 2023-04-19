@@ -9,7 +9,7 @@ from database.database import get_db
 
 router = APIRouter(
     prefix="/account",
-    tags=["account"],
+    tags=["Account"],
     responses={404: {"description": "Not found"}},
 )
 
