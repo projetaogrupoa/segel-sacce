@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 import datetime
 
 class ReservationBase(BaseModel):
@@ -20,6 +20,18 @@ class Reservation(ReservationBase):
     class Config:
         orm_mode = True
 
+
+class ReservationUpdate(BaseModel):
+    value: int
+    reservation_date: datetime.datetime
+    time_start: str
+    time_end: str
+    justification: str
+    user_type: str
+    status: str
+    area_id: str
+    account_id: str
+
 class AreaBase(BaseModel):
     name: str
 
@@ -35,6 +47,21 @@ class Area(AreaBase):
 
     class Config:
         orm_mode = True
+
+class AreaUpdate(BaseModel):
+    name: str 
+    description: str 
+    account_id: str | None = None
+
+    class Config:
+        orm_mode = True
+
+class AreaDelete(BaseModel):
+    available: bool
+
+    class Config:
+        orm_mode = True
+
 
 class AccountBase(BaseModel):
     id: str
@@ -57,6 +84,21 @@ class Account(AccountBase):
     areas = list[Area]
     
     
+    class Config:
+        orm_mode = True
+
+class AccountUpdate(BaseModel):
+    name: str
+    email: str
+    hashed_password: str
+    phone_number: str
+    
+    class Config:
+        orm_mode = True
+
+class AccountDelete(BaseModel):
+    available: bool
+
     class Config:
         orm_mode = True
 

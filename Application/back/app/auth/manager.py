@@ -99,3 +99,38 @@ def create_account(db: Session, account: schemas.Account):
     db.refresh(db_account)
 
     return db_account
+
+
+# Get Account By ID
+def get_account_by_id(db: Session, account_id: str):
+    return db.query(model.Account).filter(model.Account.id == account_id).first()
+
+# Update Account
+def update_account(db: Session, account: schemas.AccountUpdate, db_account: model.Account):
+    '''if not db_account:
+        return None'''
+    if account.name:
+        db_account.name = account.name
+    if account.email:
+        db_account.email = account.email
+    if account.hashed_password:
+        db_account.hashed_password = get_password_hash(account.hashed_password)
+    if account.phone_number:
+        db_account.phone_number = account.phone_number
+    db.commit()
+    db.refresh(db_account)
+    return db_account
+
+# Delete Account
+def delete_account(db: Session, db_account: model.Account):
+    db.delete(db_account)
+    db.commit()
+
+
+def delete_account_update(db: Session, account: schemas.AccountDelete, db_account: model.Account):
+    '''if not db_account:
+        return None'''
+    db_account.available = False
+    db.commit()
+    db.refresh(db_account)
+    return db_account

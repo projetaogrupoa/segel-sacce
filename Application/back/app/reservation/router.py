@@ -27,3 +27,24 @@ def create_reservation(reservation: schemas.Reservation, db: Session = Depends(g
 def read_users(db: Session = Depends(get_db)):
     orders = manager.get_all(db)
     return orders
+
+
+@router.put("/update/{reservation_id}", response_model=schemas.Reservation)
+def update_reservation(reservation_id: str, reservation: schemas.ReservationUpdate, db: Session = Depends(get_db)):
+    db_reservation = manager.get_reservation_by_id(db, reservation_id=reservation_id)
+    if not db_reservation:
+        raise HTTPException(
+            status_code=404, detail="Reservation not found")
+    updated_reservation = manager.update_reservation(db=db, db_reservation=db_reservation, reservation=reservation)
+    return updated_reservation
+
+
+
+@router.delete("/delete/{reservation_id}")
+def delete_reservation(reservation_id: str, db: Session = Depends(get_db)):
+    db_reservation = manager.get_reservation_by_id(db, reservation_id=reservation_id)
+    if not db_reservation:
+        raise HTTPException(
+            status_code=404, detail="Reservation not found")
+    manager.delete_reservation(db=db, db_reservation = db_reservation)
+    return {"message": "Reservation successfully deleted"}
