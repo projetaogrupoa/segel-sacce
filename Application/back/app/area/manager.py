@@ -43,27 +43,36 @@ def create_area(db: Session, area: schemas.Area):
 def get_area_by_id(db: Session, id: str):
     return db.query(model.Area).filter(model.Area.id == id).first()
 
+def get_user_by_id(db: Session, id: str):
+    find_user = db.query(model.Account).filter(model.Account.id == id).first()
+    if not find_user:
+        return False
+    elif find_user and find_user.user_type == "0":
+        return True   
+    return False
 
 def update_area(db: Session, area: schemas.AreaUpdate, db_area: model.Area):
-    '''if not db_area:
-        return None'''
     if area.name:
         db_area.name = area.name
     if area.description:
         db_area.description = area.description
-    if area.account_id:
-        db_area.account_id = area.account_id
+
+    db_area.available = area.available
+    
     db.commit()
     db.refresh(db_area)
     return db_area
+
+
 
 # Exclui tudo
 def delete_area(db: Session, db_area: model.Area):
     db.delete(db_area)
     db.commit()
+    return db_area
 
 
-def delete_area_update(db: Session, area: schemas.AreaDelete, db_area: model.Area):
+def delete_area_update(db: Session, db_area: model.Area):
     '''if not db_area:
         return None'''
     db_area.available = False

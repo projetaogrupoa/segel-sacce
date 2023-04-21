@@ -51,7 +51,8 @@ class Area(AreaBase):
 class AreaUpdate(BaseModel):
     name: str 
     description: str 
-    account_id: str | None = None
+    available: bool 
+    account_id: str
 
     class Config:
         orm_mode = True
