@@ -5,24 +5,8 @@ from database import model, schemas
 # from sheets.manager import execute
 
 
-def get_orders_by_product(db: Session, area_id: str):
-    return db.query(model.Reservation).filter(model.Reservation.area_id == area_id).all()
-
-
 def get_all(db: Session):
     return db.query(model.Reservation).all()
-
-
-def avaiable_product(db: Session, area_id: str, amount: int):
-
-    avaiable_product = db.query(model.Reservation).filter(
-        model.Reservation.id == area_id).first()
-
-    if avaiable_product.amount >= amount:
-        return avaiable_product
-
-    elif avaiable_product.amount < amount:
-        return None
 
 
 def create_reservation(db: Session, reservation: schemas.Reservation):

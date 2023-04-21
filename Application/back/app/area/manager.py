@@ -1,7 +1,6 @@
 from sqlalchemy.orm import Session
 import uuid
 from database import model, schemas
-# from sheets.manager import execute
 
 
 def get_area_by_name(db: Session, name: str):
@@ -62,7 +61,6 @@ def update_area(db: Session, area: schemas.AreaUpdate, db_area: model.Area):
     db.commit()
     db.refresh(db_area)
     return db_area
-
 
 
 # Exclui tudo

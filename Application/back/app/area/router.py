@@ -5,7 +5,6 @@ from fastapi import APIRouter, Depends, HTTPException
 from database import schemas
 from area import manager
 from database.database import get_db
-import psycopg2
 
 
 router = APIRouter(

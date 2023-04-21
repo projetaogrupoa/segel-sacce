@@ -107,8 +107,6 @@ def get_account_by_id(db: Session, account_id: str):
 
 # Update Account
 def update_account(db: Session, account: schemas.AccountUpdate, db_account: model.Account):
-    '''if not db_account:
-        return None'''
     if account.name:
         db_account.name = account.name
     if account.email:
@@ -128,8 +126,6 @@ def delete_account(db: Session, db_account: model.Account):
 
 
 def delete_account_update(db: Session, account: schemas.AccountDelete, db_account: model.Account):
-    '''if not db_account:
-        return None'''
     db_account.available = False
     db.commit()
     db.refresh(db_account)
